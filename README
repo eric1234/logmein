@@ -1,0 +1,24 @@
+A UI plugin that sits on top of authlogic to provide basic security
+(i.e. restricted access to certain actions) and a login screen to allow
+the user to get through security.
+
+This of course ASSUMES your definition of a login system is the same as
+ours. Here is what ours means:
+
+* There is a login page at the URL /login
+* There is a logout action at the URL /logout
+* All actions are protected by default unless specifically stated by
+  declaring a constant called PUBLIC_ACTIONS which is an array of
+  public actions.
+* If a protected action is hit the user will be redirected to the
+  login page with the original location saved in the session variable
+  :return_to.
+* After login the user should be directed to root_url unless the session
+  variable :return_to is set. In that case it redirects to the value
+  of :return_to. 
+
+What it does NOT provide:
+
+* User management
+* Registration
+* Forgot My Password - See our related plugin called remindme

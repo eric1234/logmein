@@ -1,0 +1,24 @@
+<h2>Login</h2>
+
+<% form_for @user_session do |f| %>
+  <%= f.error_messages %>
+
+  <table class="form">
+    <tr>
+      <th><%= f.label :email %></th>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :password %></th>
+      <td><%= f.password_field :password %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <%= f.submit 'Login' %>
+        <%= link_to 'Forgot Password',
+          new_password_path if respond_to? :new_password_path %>
+      </td>
+    </tr>
+  </table>
+<% end %>
