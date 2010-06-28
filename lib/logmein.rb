@@ -1,2 +1,2 @@
-module LogMeIn
+module Logmein
 end
