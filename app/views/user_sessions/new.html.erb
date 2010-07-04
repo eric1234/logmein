@@ -15,6 +15,13 @@
     <tr>
       <td></td>
       <td>
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
         <%= f.submit 'Login' %>
         <%= link_to 'Forgot Password',
           new_password_path if respond_to? :new_password_path %>
