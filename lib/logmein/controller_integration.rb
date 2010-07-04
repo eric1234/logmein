@@ -9,7 +9,7 @@ module Logmein::ControllerIntegration
   protected
 
   def current_user
-    session = UserSession.find
+    session = ::UserSession.find
     session && session.record
   end
 

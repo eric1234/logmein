@@ -22,6 +22,6 @@ class UserSessionsController < ApplicationController
     @user_session.destroy
     reset_session
     flash[:notice] = "Successfully logged out."
-    redirect_to root_url
+    redirect_to(params[:next] || root_url)
   end
 end

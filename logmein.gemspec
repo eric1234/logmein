@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'
   s.add_dependency 'rails'
-  s.files = Dir['**/*.rb'] + Dir['**/*.rake']
+  s.files = Dir['**/*.rb'] + Dir['**/*.rake'] + Dir['**/*.erb']
   s.has_rdoc = true
   s.extra_rdoc_files << 'README'
   s.rdoc_options << '--main' << 'README'
