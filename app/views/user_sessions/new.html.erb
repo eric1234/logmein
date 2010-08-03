@@ -6,7 +6,7 @@
   <table class="form">
     <tr>
       <th><%= f.label :email %></th>
-      <td><%= f.text_field :email %></td>
+      <td><%= f.text_field(:email).gsub('text', 'email') %></td>
     </tr>
     <tr>
       <th><%= f.label :password %></th>
