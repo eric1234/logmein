@@ -1,2 +1,4 @@
 require 'logmein/controller_integration'
-ActionController::Base.send :include, Logmein::ControllerIntegration
+config.to_prepare do
+  ApplicationController.send :include, Logmein::ControllerIntegration
+end

@@ -1,5 +1,8 @@
 module Logmein::ControllerIntegration
   def self.included(mod)
+    # To prevent double initialization
+    return if mod.method_defined? :_unmemoized_current_user
+
     mod.extend ActiveSupport::Memoizable
     mod.memoize :current_user
     mod.helper_method :current_user
