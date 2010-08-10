@@ -1,6 +1,7 @@
 <h2>Login</h2>
 
 <% form_for @user_session do |f| %>
+  <%= hidden_field_tag 'return_to', params[:return_to] if params.has_key? :return_to %>
   <%= f.error_messages %>
 
   <table class="form">
@@ -24,7 +25,8 @@
       <td>
         <%= f.submit 'Login' %>
         <%= link_to 'Forgot Password',
-          new_password_path if respond_to? :new_password_path %>
+          new_password_path(:return_to => params[:return_to]) if
+          respond_to? :new_password_path %>
       </td>
     </tr>
   </table>

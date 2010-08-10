@@ -6,7 +6,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    next_url = session[:return_to] || root_url
+    next_url = params[:return_to] || session[:return_to] || root_url
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       session.delete :return_to
