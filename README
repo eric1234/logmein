@@ -22,3 +22,10 @@ What it does NOT provide:
 * User management
 * Registration
 * Forgot My Password - See our related plugin called remindme
+
+= CREDIT
+
+This gem was developed by Eric Anderson (http://pixelwareinc.com) mostly
+for usage in projects developed under Red Tusk Studios
+(http://redtusk.com). The call recording service SaveYourCall.com
+(http://saveyourcall.com) also contributed towards the development.
