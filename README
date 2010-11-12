@@ -15,13 +15,28 @@ ours. Here is what ours means:
   :return_to.
 * After login the user should be directed to root_url unless the session
   variable :return_to is set. In that case it redirects to the value
-  of :return_to. 
+  of :return_to.
+* If session[:return_to] is blank (they went directly to /login) then
+  redirect to "home_url" that the app needs to define in their routes
+
+In addition this gem is model independent. This means the model does not
+have to be called "User" (although that is the default and you must
+inform this engine if it will be something else). It is limited to only
+providing security for one model.
+
+Note that you do not have to define the authenticated model itself
+(i.e. User). If you do not the plugin will automatically dynamically
+define a basic model for you. But if you do define the model you must
+call the acts_as_authentic macro.
 
 What it does NOT provide:
 
 * User management
 * Registration
 * Forgot My Password - See our related plugin called remindme
+
+This package is only compatible with Rails 3.x. If you are still on
+Rails 2.x check out the 0.0.5 version of this gem.
 
 = CREDIT
 

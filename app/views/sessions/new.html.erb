@@ -1,13 +1,12 @@
 <h2>Login</h2>
 
-<% form_for @user_session do |f| %>
-  <%= hidden_field_tag 'return_to', params[:return_to] if params.has_key? :return_to %>
-  <%= f.error_messages %>
+<%= form_for @session, :url => session_path do |f| %>
+  <%= f.send Logmein.error_messages_helper %>
 
   <table class="form">
     <tr>
       <th><%= f.label :email %></th>
-      <td><%= f.text_field(:email).gsub('text', 'email') %></td>
+      <td><%= f.email_field :email, :autofocus => true %></td>
     </tr>
     <tr>
       <th><%= f.label :password %></th>
@@ -25,9 +24,9 @@
       <td>
         <%= f.submit 'Login' %>
         <%= link_to 'Forgot Password',
-          new_password_path(:return_to => params[:return_to]) if
-          respond_to? :new_password_path %>
+          new_password_path if respond_to? :new_password_path %>
       </td>
     </tr>
   </table>
+
 <% end %>
