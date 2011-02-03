@@ -1,12 +1,19 @@
 module Logmein::ControllerIntegration
-  def self.included(mod)
-    # To prevent double initialization
-    return if mod.method_defined? :_unmemoized_authenticated_record
+  extend ActiveSupport::Concern
 
-    mod.extend ActiveSupport::Memoizable
-    mod.memoize :authenticated_record
-    mod.helper_method :authenticated_record
-    mod.before_filter :authenticate
+  included do
+    # To prevent double initialization
+    return if method_defined? :_unmemoized_authenticated_record
+
+    extend ActiveSupport::Memoizable
+    memoize :authenticated_record
+    helper_method :authenticated_record
+    before_filter :authenticate
+
+    # To allow current_user to be an alias of authenticated_record
+    alt_method = "current_#{Logmein.authenticated_model_name.underscore}".to_sym
+    alias_method alt_method, :authenticated_record
+    helper_method alt_method
   end
 
   protected
