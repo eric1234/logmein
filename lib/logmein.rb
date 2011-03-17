@@ -22,6 +22,14 @@ module Logmein
   #
   # Who misses the days of relative_uri_root?
   mattr_accessor :route_scope
+
+  # A named route that the user should be directed to after login
+  mattr_accessor :login_destination
+  self.login_destination = :root_url
+
+  # A named route that the user should be directed to after logout
+  mattr_accessor :logout_destination
+  self.logout_destination = :root_url
 end
 
 require 'logmein/engine'

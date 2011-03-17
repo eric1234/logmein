@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    next_url = session[:return_to] || home_url
+    next_url = session[:return_to] || send(Logmein.login_destination)
     @session = Session.new params[:session]
     if @session.save
       session.delete :return_to
@@ -22,6 +22,6 @@ class SessionsController < ApplicationController
     @session.destroy
     reset_session
     flash[:notice] = "Successfully logged out."
-    redirect_to root_url
+    redirect_to send(Logmein.logout_destination)
   end
 end
