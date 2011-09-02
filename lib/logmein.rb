@@ -9,13 +9,6 @@ module Logmein
   mattr_accessor :authenticated_model_name
   self.authenticated_model_name = 'User'
 
-  # The method called on the form builder to output the error messages.
-  # Defaults to the old "error_messages" helper Rails used to have
-  # built-in (and is still installable as an addon). But if you have
-  # your own helper for your own mojo you can set that here.
-  mattr_accessor :error_messages_helper
-  self.error_messages_helper = :error_messages
-
   # If your app is in a subdirectory you need to be able to indicate
   # that all routes should be scoped to a directory. Of course leave
   # as nil if your app is in the root directory.
