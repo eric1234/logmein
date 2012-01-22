@@ -1,23 +1,29 @@
 class AddLoginFields < ActiveRecord::Migration
 
-  def self.up
-    # In general the users table should already exist but just in
-    # case it does not go ahead and create it.
-    create_table :users do |u|
+  def up
+    # Add table in case app has not already done so to save the app a step
+    # of defining a migration just to define the table.
+    create_table table_name do |u|
       u.string :email, :null => false
-    end unless ActiveRecord::Base.connection.table_exists? :users
+    end unless ActiveRecord::Base.connection.table_exists? table_name
 
-    change_table :users do |u|
+    # Add the fields we need to authenticate a user.
+    change_table table_name do |u|
       u.string :crypted_password, :password_salt, :persistence_token
     end
   end
 
-  def self.down
-    change_table :users do |u|
+  def down
+    change_table table_name do |u|
       u.remove :crypted_password, :password_salt, :persistence_token
     end
-    # NOTE: We do not remove the users table as we don't know if
-    # we added it or if it was already there.
+    # NOTE: Don't remove table since we don't know who added it.
+  end
+
+  private
+
+  def table_name
+    Logmein.authenticated_model_name.downcase.pluralize.to_sym
   end
 
 end

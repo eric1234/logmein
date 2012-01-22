@@ -1,0 +1,137 @@
+= Description
+
+A compromise between building a perfect custom authentication system and using
+HTTP Authentication. You get a standard authentication system that is familar
+to users (like doing a custom system) with very little work (like HTTP Auth).
+
+= Setup
+
+Add to your Gemfile
+
+    gem 'logmein'
+
+If the model being authenticated is something other than "User" then in an
+initializer add:
+
+    Logmein.authenticated_model_name = 'Account'
+
+Replace 'Account' with whatever your actual model name is. The model should use
+AuthLogic and likely will look something like this:
+
+    class User < ActiveRecord::Base
+      acts_as_authentic
+    end
+
+Although it is up to you to define the model this library does provide a
+migration to add the fields necessary for authentication. Just run:
+
+    rake railties:install:migrations
+
+= Access Control
+
+ALL actions are assumed to be restricted and you must open up actions if you
+want them available to the general public. You do this by defining a
+PUBLIC_ACTIONS constant in your controller. The value of this constant is
+an array of action names. So:
+
+    class UsersController < ApplicationController
+      PUBLIC_ACTIONS = %w(show)
+    end
+
+This will make the "show" action on the UsersController accessible by anyone.
+All other actions on this controller will be restricted. If the constant is
+not defined then all actions will require an authenticated record.
+
+When an un-authenticated user attempts to access a restricted action they will
+automatically be redirected to the login screen. After a successful login they
+will automatically be taken back to the restricted action (only if the
+action was a GET request as we cannot redirect to another HTTP request type).
+
+If a user goes directly to the login page (i.e /login) this add-on won't know
+where to send the user after login. By default the user is sent to root_url
+since most applications define a "root" route that goes to the home page. If you
+want to override this default simply adjust in an initializer.
+
+    Logmein.login_destination = :profile_url
+
+The value should be a symbol which can then be called via "send" in the
+controller. Usually this will be a named route.
+
+Logout works the same way. After logout you are sent to the "root" route by
+default but can override by putting the following in an initializer.
+
+    Logmein.logout_destination = :login_url
+
+= Tips and Tricks
+
+* A "login" and "logout" route is defined allowing your URL to be more familar
+  than the REST routes (GET /session/new and DELETE /session).
+* To get the current user use the helper "current_user". This is available in
+  controllers, helpers and view. If you change the authenticated model this
+  method will be renamed to match (i.e. current_account if your model is
+  Account).
+* The login page will check for the method "new_password_path". If that method
+  is defined, a forgot password link will be created on the login page. This
+  allows you easily to have a forgot password feature without having to override
+  the login template. There is a companion Rails add-on called "remindme" that
+  provides this functionality.
+
+= Alternatives
+
+There are many ways to implement authentication in Rails.
+
+== Custom Authentication
+
+Making a custom implementation from ground up provides a user experience that
+fits in perfectly with the app. Necessary for some apps, but really the most
+expensive way to go. Often less tested then using off-the-shelf code, so more
+room for authentication bugs. User privacy and security are too important to
+assume that it is easy to write from ground up without a lot of code review and
+testing.
+
+== Authentication Generator
+
+A generator gets a standard authentication up and running quickly. You can then
+customize to meet the needs of an app. Increased reliability over a custom
+implementation since the generator likely has had more eyes looking at the code.
+Also quick time to implement and still full ability to customize. But it adds a
+lot of code to your project that you may not end up customizing. This extra code
+must still be maintained adding extra on-going costs. As the generator gets
+enhanced you cannot take advantage of those enhancements easily.
+
+= Re-usable models, custom controller/views
+
+A good example of this is AuthLogic. Lowers the barrier for creating a custom
+implementation by providing all the hard bits and letting you just focus on
+workflow and the visual UI. The extensive customization options and
+extensibility means that most anything is still open but with a lot less work.
+While an excellent solution sometimes you just don't care that much about having
+your login system being a perfect unique snowflake. You just want to drop
+something in and not have to think much more about it.
+
+= HTTP Auth
+
+A drop-in authentication supported by Rails and browers out-of-the-box. Quick
+and easy to implement and supported by any browser. But the user experience is
+quite poor. The login prompt is a UI liability (ugly, hard to provide
+instruction, etc). Also many features users expect from a login system
+(remember me, forgot password, etc) are not an option. It doesn't even have an
+ability to logout!
+
+= logmein
+
+While all the above options have their place, I wanted a development experience
+like HTTP Auth but with a UI experience more like the other options. This is
+what this Rails add-on provides. You can have a login system in minutes.
+Customization is limited (to keep things simple) but is still more flexible and
+capabile than HTTP Auth. Even if you think you eventually want your own system
+in your app this is a greater starter login system that you can then later
+replace after you have gotten more important things implemented relevant to your
+application domain.
+
+= CREDIT
+
+* Developed by Eric Anderson (http://pixelwareinc.com)
+* Enhanced via projects developed under Red Tusk Studios (http://redtusk.com)
+* SaveYourCall.com (http://saveyourcall.com), a call recording service,
+  also contributed towards development.
