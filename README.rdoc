@@ -99,7 +99,7 @@ lot of code to your project that you may not end up customizing. This extra code
 must still be maintained adding extra on-going costs. As the generator gets
 enhanced you cannot take advantage of those enhancements easily.
 
-= Re-usable models, custom controller/views
+== Re-usable models, custom controller/views
 
 A good example of this is AuthLogic. Lowers the barrier for creating a custom
 implementation by providing all the hard bits and letting you just focus on
@@ -109,7 +109,7 @@ While an excellent solution sometimes you just don't care that much about having
 your login system being a perfect unique snowflake. You just want to drop
 something in and not have to think much more about it.
 
-= HTTP Auth
+== HTTP Auth
 
 A drop-in authentication supported by Rails and browers out-of-the-box. Quick
 and easy to implement and supported by any browser. But the user experience is
@@ -118,7 +118,7 @@ instruction, etc). Also many features users expect from a login system
 (remember me, forgot password, etc) are not an option. It doesn't even have an
 ability to logout!
 
-= logmein
+== logmein
 
 While all the above options have their place, I wanted a development experience
 like HTTP Auth but with a UI experience more like the other options. This is
