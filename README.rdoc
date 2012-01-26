@@ -73,12 +73,14 @@ default but can override by putting the following in an initializer.
 * The login page will check for the method "new_password_path". If that method
   is defined, a forgot password link will be created on the login page. This
   allows you easily to have a forgot password feature without having to override
-  the login template. There is a companion Rails add-on called "remindme" that
-  provides this functionality.
+  the login template. This integrates nicely with the
+  remindme[https://github.com/eric1234/remindme] companion rails add-on although
+  you don't have to use that.
 
 = Alternatives
 
-There are many ways to implement authentication in Rails.
+There are many ways to implement authentication in Rails. Here are a few of
+the alternatives so you can determine if this add-on is right for you.
 
 == Custom Authentication
 
@@ -87,7 +89,8 @@ fits in perfectly with the app. Necessary for some apps, but really the most
 expensive way to go. Often less tested then using off-the-shelf code, so more
 room for authentication bugs. User privacy and security are too important to
 assume that it is easy to write from ground up without a lot of code review and
-testing.
+testing. Also not all apps need perfectly formed authentication. Off-the-shelf
+is often good enough.
 
 == Authentication Generator
 
