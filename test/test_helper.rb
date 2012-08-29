@@ -17,12 +17,11 @@ class ActiveSupport::TestCase < Test::Unit::TestCase
   # A fixture for creating a new user. This user is explicitly NOT logged in
   # despite AuthLogic's attempts to do so.
   def create_user
-    attrs = {
-      :email => 'joe@example.com',
-      :password => 'password',
-      :password_confirmation => 'password'
-    }
-    User.create!(attrs).tap do
+    User.create! do |u|
+      u.email = 'joe@example.com'
+      u.password = 'password'
+      u.password_confirmation = 'password'
+    end.tap do
       Session.find.destroy if Session.find
     end
   end

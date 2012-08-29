@@ -1,11 +1,12 @@
 Gem::Specification.new do |s|
   s.name = 'logmein'
-  s.version = '0.2.0'
+  s.version = '0.2.1'
   s.homepage = 'http://wiki.github.com/eric1234/logmein/'
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'
   s.add_dependency 'rails', '> 3'
   s.add_dependency 'authlogic'
+  s.add_development_dependency 'debugger'
   s.add_development_dependency 'test_engine'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'database_cleaner'
