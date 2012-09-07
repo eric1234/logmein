@@ -4,14 +4,15 @@ module Logmein::ControllerIntegration
 
   included do
     helper_method :authenticated_record
-    before_filter :authenticate
+    before_filter :check_authentication
+    rescue_from Logmein::NotAuthenticated, :with => :authenticate
   end
 
   protected
 
   # Returns current authenticated user. Note that is this aliased as
-  # current_[class_name]. So if the authenticated object is a User then you
-  # can use "current_user"
+  # current_[class_name]. So if the authenticated object is a User then
+  # you can use "current_user"
   def authenticated_record
     return @__authenticated_record if
       instance_variable_defined? :@__authenticated_record
@@ -25,16 +26,30 @@ module Logmein::ControllerIntegration
 
   # All actions require an authenticated record UNLESS it is in the
   # PUBLIC_ACTIONS constant.
-  def authenticate
+  def check_authentication
     # If path not define then we must be in an isolated engine. In that
     # case security doesn't apply (it does say it wants to be isolated).
     return unless respond_to? :login_url
 
-    is_public = self.class.const_defined?('PUBLIC_ACTIONS') &&
-      self.class::PUBLIC_ACTIONS.collect(&:to_sym).include?(action_name.to_sym)
-    unless is_public || authenticated_record
-      session[:return_to] = params if request.get?
-      redirect_to login_url
-    end
+    raise Logmein::NotAuthenticated unless
+      is_public_action? || authenticated_record
+  end
+
+  # Look for the constant PUBLIC_ACTIONS in the current class. If
+  # found and if the current action is in that list then return true.
+  # Otherwise return false.
+  def is_public_action?
+    klass = self.class
+    return false unless klass.const_defined? 'PUBLIC_ACTIONS'
+    klass::PUBLIC_ACTIONS.collect(&:to_s).include? action_name
+  end
+
+  # Will save the current request and redirect the user to login. After
+  # login the user will be redirected back to the request. Note that
+  # only GET requests can be saved since we cannot redirect to a POST
+  # (and probably don't want to even if we could hack it).
+  def authenticate(exception)
+    session[:return_to] = params if request.get?
+    redirect_to login_url
   end
 end

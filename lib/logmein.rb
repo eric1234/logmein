@@ -19,6 +19,12 @@ module Logmein
   # A named route that the user should be directed to after logout
   mattr_accessor :logout_destination
   self.logout_destination = :root_url
+
+  # Used internally to trigger the request saving and redirect to login.
+  # can be used by the application if it is opting out of the standard
+  # security setup but wants the same handling when doing it's own
+  # checking.
+  class NotAuthenticated < StandardError; end
 end
 
 require 'logmein/controller_integration'
