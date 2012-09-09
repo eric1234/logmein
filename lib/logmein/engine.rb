@@ -12,9 +12,6 @@ class Logmein::Engine < Rails::Engine
     alt_method = "current_#{Logmein.authenticated_model_name.underscore}".to_sym
     ActionController::Base.send :alias_method, alt_method, :authenticated_record
     ActionController::Base.send :helper_method, alt_method
-
-    # Mixin AFTER Authlogic loads
-    ActiveRecord::Base.send :include, Logmein::AuthlogicIntegration
   end
 
 end
