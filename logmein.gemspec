@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'logmein'
-  s.version = '0.2.3'
+  s.version = '0.2.4'
   s.homepage = 'http://wiki.github.com/eric1234/logmein/'
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'

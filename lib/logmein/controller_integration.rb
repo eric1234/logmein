@@ -3,7 +3,7 @@ module Logmein::ControllerIntegration
   extend ActiveSupport::Concern
 
   included do
-    helper_method :authenticated_record
+    helper_method :authenticated_record, :authenticated_record?, :logged_in?
     before_filter :check_authentication
     rescue_from Logmein::NotAuthenticated, :with => :authenticate
   end
@@ -21,6 +21,8 @@ module Logmein::ControllerIntegration
       session && session.record
     end
   end
+  alias_method :authenticated_record?, :authenticated_record
+  alias_method :logged_in?, :authenticated_record
 
   private
 
