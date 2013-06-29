@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    logmein (0.2.6)
+    logmein (0.2.7)
       authlogic
       rails (> 3)
 
