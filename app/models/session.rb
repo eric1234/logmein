@@ -3,7 +3,6 @@
 # name of that class will be we just call this class "Session" instead of
 # following the Authlogic convention (i.e. UserSession).
 class Session < Authlogic::Session::Base
-  unloadable # To avoid reloading of every request in development.
 
   # Dynamically determine from Logmein config since we are not following
   # naming convention.
