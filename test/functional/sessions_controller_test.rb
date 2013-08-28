@@ -3,8 +3,8 @@ require 'test_helper'
 class SessionsControllerTest < ActionController::TestCase
 
   self.custom_routes = proc do
-    match 'home' => proc {[200, {}, ['Home page']]}
-    match 'restricted' => proc {[200, {}, ['Restricted page']]}
+    get 'home' => proc {[200, {}, ['Home page']]}
+    get 'restricted' => proc {[200, {}, ['Restricted page']]}
     root :to => proc {[200, {}, ['Home page']]}
   end
 

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'logmein'
-  s.version = '0.2.7'
+  s.version = '0.2.8'
   s.homepage = 'https://github.com/eric1234/logmein'
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'
@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'debugger'
   s.add_development_dependency 'test_engine'
   s.add_development_dependency 'capybara'
-  s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency 'database_cleaner', '1.0.1'
   s.files = Dir['**/*.rb'] + Dir['**/*.erb']
   s.has_rdoc = true
   s.extra_rdoc_files << 'README.rdoc'

@@ -2,7 +2,8 @@ require 'rails/test_help'
 require "authlogic/test_case"
 require 'capybara/rails'
 
-class ActiveSupport::TestCase < Test::Unit::TestCase
+class ActiveSupport::TestCase
+  include Authlogic::TestCase
   setup :activate_authlogic
 
   # Ensure default config is restored before every test

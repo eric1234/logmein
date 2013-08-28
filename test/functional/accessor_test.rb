@@ -3,8 +3,8 @@ require 'test_helper'
 class AccessorControllerTest < ActionController::TestCase
 
   self.custom_routes = proc do
-    match 'current_XXXX' => 'accessor#current_XXXX'
-    match 'auth_record' => 'accessor#auth_record'
+    get 'current_XXXX' => 'accessor#current_XXXX'
+    get 'auth_record' => 'accessor#auth_record'
   end
 
   def setup

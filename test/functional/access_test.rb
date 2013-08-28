@@ -3,8 +3,8 @@ require 'test_helper'
 class AccessControllerTest < ActionController::TestCase
 
   self.custom_routes = proc do
-    match 'open' => 'access#open'
-    match 'restricted' => 'access#restricted'
+    get 'open' => 'access#open'
+    get 'restricted' => 'access#restricted'
   end
 
   test 'public actions accessible without login' do

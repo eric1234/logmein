@@ -3,9 +3,9 @@ require 'test_helper'
 class StoriesTest < ActionDispatch::IntegrationTest
 
   self.custom_routes = proc do
-    match 'restricted' => 'access#restricted'
-    match 'dashboard' => 'access#dashboard'
-    match 'open' => 'access#open'
+    get 'restricted' => 'access#restricted'
+    get 'dashboard' => 'access#dashboard'
+    get 'open' => 'access#open'
   end
 
   def setup
