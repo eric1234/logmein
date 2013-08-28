@@ -2,6 +2,10 @@
 class SessionsController < ApplicationController
   PUBLIC_ACTIONS = %w(new create)
 
+  # Login form might be hosted elsewhere (brochure site). Protection
+  # not really needed for this action anyway.
+  skip_before_filter :verify_authenticity_token, only: :create
+
   # The login form
   def new
     @session = Session.new
