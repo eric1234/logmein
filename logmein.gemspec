@@ -4,6 +4,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/eric1234/logmein'
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'
+  s.license = 'Public domain'
   s.add_dependency 'rails', '> 3'
   s.add_dependency 'authlogic'
   s.add_development_dependency 'debugger'
