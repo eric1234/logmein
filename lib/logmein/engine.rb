@@ -3,7 +3,7 @@ class Logmein::Engine < Rails::Engine
   initializer 'logmein.setup' do
     # Apply security to all controllers
     ActiveSupport.on_load(:action_controller) do
-      include Logmein::ControllerIntegration
+      ActionController::Base.include Logmein::ControllerIntegration
     end
   end
 

@@ -4,7 +4,7 @@ module Logmein::ControllerIntegration
 
   included do
     helper_method :authenticated_record, :authenticated_record?, :logged_in?
-    before_filter :check_authentication
+    before_action :check_authentication
     rescue_from Logmein::NotAuthenticated, :with => :authenticate
   end
 
