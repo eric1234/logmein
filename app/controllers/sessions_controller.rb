@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   # Process a login
   def create
     next_url = session[:return_to] || send(Logmein.login_destination)
-    @session = Session.new params[:session]
+    @session = Session.new params.require(:session).permit :email, :password
     if @session.save
       session.delete :return_to
       flash[:notice] = "Successfully logged in."

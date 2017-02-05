@@ -51,7 +51,7 @@ module Logmein::ControllerIntegration
   # only GET requests can be saved since we cannot redirect to a POST
   # (and probably don't want to even if we could hack it).
   def authenticate(exception)
-    session[:return_to] = params if request.get?
+    session[:return_to] = request.fullpath if request.get?
     redirect_to login_url
   end
 end
